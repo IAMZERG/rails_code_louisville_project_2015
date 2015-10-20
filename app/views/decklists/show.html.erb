@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @decklist.name %>
+</p>
+
+<% @decklist.cards.each do |card| %>
+  <p><%= card.quantity %> <%= card.name %> </p>
+<% end %>
+<p><input type="text" placeholder="quantity"> <input type="text" placeholder="name"></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @decklist.description %>
+</p>
+
+<%= link_to 'Edit', edit_decklist_path(@decklist) %> |
+<%= link_to 'Back', decklists_path %>

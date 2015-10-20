@@ -1,0 +1,29 @@
+<h1>Listing decklists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @decklists.each do |decklist| %>
+      <tr>
+        <td><%= decklist.name %></td>
+        <td><%= decklist.description %></td>
+        <td><%= link_to 'Show', decklist %></td>
+        <td><%= link_to 'Edit', edit_decklist_path(decklist) %></td>
+        <td><%= link_to 'Destroy', decklist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Decklist', new_decklist_path %>
