@@ -3,7 +3,7 @@ class CreateDecklistCards < ActiveRecord::Migration
     create_table :decklist_cards do |t|
       t.belongs_to :decklist
       t.belongs_to :card
-      t.quantity :integer
+      t.integer :quantity
       t.timestamps
     end
   end
