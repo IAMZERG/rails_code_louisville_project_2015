@@ -1,3 +1,4 @@
 class Card < ActiveRecord::Base
-  t.has_many :decklists, through: :decklist_cards
+  has_many :decklists, through: :decklist_cards
+  has_many :decklist_cards
 end
