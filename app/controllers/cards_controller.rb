@@ -14,7 +14,13 @@ class CardsController < ApplicationController
 
   # GET /cards/new
   def new
-    @card = Card.new
+    decklist = Decklist.find(params[:decklist_id])
+    @card = decklist.cards.build
+
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @card }
+    end
   end
 
   # GET /cards/1/edit
@@ -24,12 +30,15 @@ class CardsController < ApplicationController
   # POST /cards
   # POST /cards.json
   def create
-    @card = Card.new(card_params)
+    puts(params)
+    decklist = Decklist.find(params[:id])
+
+    @card = decklist.cards.create(params[:card])
 
     respond_to do |format|
       if @card.save
-        format.html { redirect_to @card, notice: 'Card was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @card }
+        format.html { redirect_to [@card.decklist, @card], notice: 'Card was successfully created.' }
+        format.json { render action: 'show', status: :created, location: [@card.decklist, @card] }
       else
         format.html { render action: 'new' }
         format.json { render json: @card.errors, status: :unprocessable_entity }

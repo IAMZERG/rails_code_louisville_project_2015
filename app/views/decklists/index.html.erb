@@ -16,6 +16,7 @@
       <tr>
         <td><%= decklist.name %></td>
         <td><%= decklist.description %></td>
+
         <td><%= link_to 'Show', decklist %></td>
         <td><%= link_to 'Edit', edit_decklist_path(decklist) %></td>
         <td><%= link_to 'Destroy', decklist, method: :delete, data: { confirm: 'Are you sure?' } %></td>

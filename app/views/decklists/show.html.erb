@@ -5,11 +5,6 @@
   <%= @decklist.name %>
 </p>
 
-<% @decklist.cards.each do |card| %>
-  <p><%= card.quantity %> <%= card.name %> </p>
-<% end %>
-<p><input type="text" placeholder="quantity"> <input type="text" placeholder="name"></p>
-
 <p>
   <strong>Description:</strong>
   <%= @decklist.description %>

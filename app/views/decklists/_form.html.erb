@@ -24,3 +24,24 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+
+
+
+
+<% @decklist.cards.each do |c| %>
+  <%= form_for(c) do |card| %>
+    <div class="field">
+      <%= card.label :quantity %><br>
+      <%= card.text_field :quantity %>
+    </div>
+    <div class="field">
+      <%= card.label :name %><br>
+      <%= card.text_field :name %>
+    </div>
+    <div class="actions">
+      <%= card.submit %>
+    </div>
+    <%= link_to "add card", new_decklist_card_path(@decklist.id) %>
+  <% end %>
+<% end %>

@@ -61,6 +61,11 @@ class DecklistsController < ApplicationController
     end
   end
 
+  def add_card(name, quantity)
+    c = Card.new(name: name)
+    @decklist.cards.create(card: c, quantity: quantity)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_decklist
