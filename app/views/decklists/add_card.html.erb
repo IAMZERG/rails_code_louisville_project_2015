@@ -1,0 +1,5 @@
+<%= form_for :decklist, @decklist.cards, :url=>{:action => "create" } do |f| %>
+  <%= f.text_field :quantity %>
+  <%= f.text_field :name %>
+  <%= submit_tag "Add Card" %>
+<% end %>
