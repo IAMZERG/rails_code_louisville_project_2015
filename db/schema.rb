@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151025190560) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "cards", force: true do |t|
     t.integer  "decklist_id"
     t.string   "name"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20151025190560) do
     t.datetime "updated_at"
   end
 
-  add_index "cards", ["decklist_id"], name: "index_cards_on_decklist_id"
+  add_index "cards", ["decklist_id"], name: "index_cards_on_decklist_id", using: :btree
 
   create_table "decklist_cards", force: true do |t|
     t.integer  "decklist_id"
@@ -30,8 +33,8 @@ ActiveRecord::Schema.define(version: 20151025190560) do
     t.datetime "updated_at"
   end
 
-  add_index "decklist_cards", ["card_id"], name: "index_decklist_cards_on_card_id"
-  add_index "decklist_cards", ["decklist_id"], name: "index_decklist_cards_on_decklist_id"
+  add_index "decklist_cards", ["card_id"], name: "index_decklist_cards_on_card_id", using: :btree
+  add_index "decklist_cards", ["decklist_id"], name: "index_decklist_cards_on_decklist_id", using: :btree
 
   create_table "decklists", force: true do |t|
     t.string   "name"
@@ -41,15 +44,15 @@ ActiveRecord::Schema.define(version: 20151025190560) do
   end
 
   create_table "versions", force: true do |t|
-    t.string   "item_type",                         null: false
-    t.integer  "item_id",                           null: false
-    t.string   "event",                             null: false
+    t.string   "item_type",      null: false
+    t.integer  "item_id",        null: false
+    t.string   "event",          null: false
     t.string   "whodunnit"
-    t.text     "object",         limit: 1073741823
+    t.text     "object"
     t.datetime "created_at"
-    t.text     "object_changes", limit: 1073741823
+    t.text     "object_changes"
   end
 
-  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
 end
