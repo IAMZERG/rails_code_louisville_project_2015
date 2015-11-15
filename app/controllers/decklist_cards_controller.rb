@@ -1,4 +1,5 @@
-class CardsController < ApplicationController
+
+class DecklistCardsController < ApplicationController
   before_action :set_card, only: [:show, :edit, :update, :destroy]
 
   # GET /cards
@@ -14,8 +15,13 @@ class CardsController < ApplicationController
 
   # GET /cards/new
   def new
-    @decklist = Decklist.find(params[:decklist_id])
-    @card = @decklist.cards.build
+    decklist = Decklist.find(params[:decklist_id])
+    @card = decklist.cards.build
+
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @card }
+    end
   end
 
   # GET /cards/1/edit
@@ -25,13 +31,14 @@ class CardsController < ApplicationController
   # POST /cards
   # POST /cards.json
   def create
+    puts(params)
+    decklist = Decklist.find(params[:decklist_id])
 
-    @decklist = Decklist.find(params[:decklist_id])
-    @card = Card.create(params[:id])
+    @card = decklist.cards.create(params[:card])
 
     respond_to do |format|
       if @card.save
-        format.html { redirect_to @decklist, notice: 'Card was successfully created.' }
+        format.html { redirect_to [@card.decklist, @card], notice: 'Card was successfully created.' }
         format.json { render action: 'show', status: :created, location: [@card.decklist, @card] }
       else
         format.html { render action: 'new' }
@@ -43,7 +50,6 @@ class CardsController < ApplicationController
   # PATCH/PUT /cards/1
   # PATCH/PUT /cards/1.json
   def update
-    @card.find(params[:id])
     respond_to do |format|
       if @card.update(card_params)
         format.html { redirect_to @card, notice: 'Card was successfully updated.' }
@@ -73,6 +79,6 @@ class CardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.permit(card: [], decklist: [])
+      params.require(:card).permit(:quantity, :name)
     end
 end

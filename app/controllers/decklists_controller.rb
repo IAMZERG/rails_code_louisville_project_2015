@@ -15,6 +15,7 @@ class DecklistsController < ApplicationController
   # GET /decklists/new
   def new
     @decklist = Decklist.new
+    10.times { @decklist.cards.build }
   end
 
   # GET /decklists/1/edit
@@ -62,8 +63,7 @@ class DecklistsController < ApplicationController
   end
 
   def add_card(name, quantity)
-    c = Card.new(name: name)
-    @decklist.cards.create(card: c, quantity: quantity)
+    @decklist.cards.create(name: name, quantity: quantity)
   end
 
   private
@@ -74,6 +74,6 @@ class DecklistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def decklist_params
-      params.require(:decklist).permit(:name, :description)
+      params.require(:decklist).permit(:name, :description, cards_attributes: [:quantity, :name])
     end
 end
