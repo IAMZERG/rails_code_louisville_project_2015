@@ -11,37 +11,30 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="decklist_fields">
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :description %><br>
+      <%= f.text_area :description %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
+  <%= f.fields_for :cards do |cards_form| %>
+    <div class="field">
+      <%= cards_form.label :quantity %>
+      <%= cards_form.text_field :quantity %>
+    </div>
+    <div class="field">
+      <%= cards_form.label :name %>
+      <%= cards_form.text_field :name %>
+    </div>
+  <% end %>
+
+
 
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
-
-
-
-
-
-<% @decklist.cards.each do |c| %>
-  <%= form_for(c) do |card| %>
-    <div class="field">
-      <%= card.label :quantity %><br>
-      <%= card.text_field :quantity %>
-    </div>
-    <div class="field">
-      <%= card.label :name %><br>
-      <%= card.text_field :name %>
-    </div>
-    <div class="actions">
-      <%= card.submit %>
-    </div>
-    <%= link_to "add card", new_decklist_card_path(@decklist.id) %>
-  <% end %>
 <% end %>

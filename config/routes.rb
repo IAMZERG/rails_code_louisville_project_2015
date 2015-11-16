@@ -1,5 +1,4 @@
 Gotdecks::Application.routes.draw do
-  resources :cards
 
   resources :decklists do
     resources :cards

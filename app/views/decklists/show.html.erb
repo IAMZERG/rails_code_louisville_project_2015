@@ -10,5 +10,9 @@
   <%= @decklist.description %>
 </p>
 
+<% @decklist.cards.each do |card| %>
+  <div class="card"><%= card.quantity %> <%= card.name %></div>
+<% end %>
+
 <%= link_to 'Edit', edit_decklist_path(@decklist) %> |
 <%= link_to 'Back', decklists_path %>
