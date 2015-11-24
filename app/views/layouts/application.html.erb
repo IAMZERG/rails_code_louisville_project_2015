@@ -8,6 +8,20 @@
 </head>
 <body>
 
+  <div class="nav">
+    <h1><%= link_to "Gotdecks", root_path  %></h1>
+    <ul>
+      <li><%= link_to "Decklists", decklists_path %></li>
+      <li><%= link_to "Sign Up", new_user_path %></li>
+      <li><%= link_to "Sign In", user_sessions_path %></li>
+    </ul>
+
+    <% flash.each do |type, message| %>
+      <div class="alert flash <%= type %>">
+        <%= message %>
+      </div>
+    <% end %>
+
 <%= yield %>
 
 </body>

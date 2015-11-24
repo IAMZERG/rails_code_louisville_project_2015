@@ -13,7 +13,7 @@
 
   <tbody>
     <% @decklists.each do |decklist| %>
-      <tr>
+      <tr id=<%="decklist_#{decklist.id}"%>>
         <td><%= decklist.name %></td>
         <td><%= decklist.description %></td>
 

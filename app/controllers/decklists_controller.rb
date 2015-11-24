@@ -1,4 +1,5 @@
 class DecklistsController < ApplicationController
+  before_action :require_user
   before_action :set_decklist, only: [:show, :edit, :update, :destroy]
 
   # GET /decklists
@@ -25,7 +26,7 @@ class DecklistsController < ApplicationController
   # POST /decklists
   # POST /decklists.json
   def create
-    @decklist = Decklist.new(decklist_params)
+    @decklist = current_user.decklists.new(decklist_params)
 
     respond_to do |format|
       if @decklist.save
@@ -75,6 +76,6 @@ class DecklistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def decklist_params
-      params.require(:decklist).permit(:name, :description, decklist_cards: [])
+      params.require(:decklist).permit(:name, :description, cards_attributes: [:id, :name, :quantity])
     end
 end
