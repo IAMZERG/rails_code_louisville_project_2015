@@ -1,12 +1,8 @@
 require 'spec_helper'
 
 describe "Editing decklists" do
-  let(:user) { create(:user) }
-  before do
-    sign_in(user)
-  end
-
-  let!(:decklist) { Decklist.create(name: "Groceries", description: "Grocery list.") }
+  let(:user) { decklist.user }
+  let!(:decklist) { create(:decklist) }
 
   def update_decklist(options={})
     options[:name] ||= "My decklist"
@@ -21,6 +17,10 @@ describe "Editing decklists" do
     fill_in "Decklist Name", with: options[:name]
     fill_in "Description", with: options[:description]
     click_button "Update Decklist"
+  end
+
+  before do
+    sign_in decklist.user, password: "treehouse1"
   end
 
   it "updates a decklist successfully with correct information" do

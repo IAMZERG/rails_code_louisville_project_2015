@@ -1,12 +1,13 @@
 require 'spec_helper'
 
 describe "Deleting decklists" do
-  let(:user) { create(:user) }
+  let(:user) { decklist.user }
+  let!(:decklist) { create(:decklist) }
+
   before do
-    sign_in(user)
+    sign_in user, password: "treehouse1"
   end
 
-  let!(:decklist) { Decklist.create(name: "Groceries", description: "Grocery list.") }
 
   it "is successful when clicking the destroy link" do
     visit "/decklists"

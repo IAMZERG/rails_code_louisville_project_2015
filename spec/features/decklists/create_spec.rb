@@ -16,7 +16,7 @@ describe "Creating decklists" do
   end
 
   before do
-    sign_in(user)
+    sign_in user, password: "treehouse1"
   end
 
   it "redirects to the decklist index page on success" do
