@@ -10,9 +10,8 @@
   <%= @decklist.description %>
 </p>
 
-<%= @decklist.cards %>
 
-<%= @decklist.cards.each do |card| %>
+<% @decklist.cards.each do |card| %>
   <div class="card"><%= card.quantity %> <%= card.name %></div>
 <% end %>
 

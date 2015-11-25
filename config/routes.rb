@@ -7,6 +7,8 @@ Gotdecks::Application.routes.draw do
     resources :cards, only: [:new, :create, :edit, :update, :destroy]
   end
 
+  resources :password_resets, only: [:new, :create, :edit, :update]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
