@@ -9,6 +9,7 @@ class Decklist < ActiveRecord::Base
     length: { minimum: 3 }
 
   validate :card_names_are_unique_for_decklist
+  has_paper_trail
 
   before_save :reset_total
 

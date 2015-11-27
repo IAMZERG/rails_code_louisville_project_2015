@@ -96,4 +96,44 @@ describe Decklist do
       expect(decklist.total).to eq(53)
     end
   end
+  context "#paper_trail testing" do
+    let(:decklist) { Decklist.create(
+      name: "my awesome deck",
+      description: "this is my awesome deck",
+      cards_attributes: [
+        {
+          name: "Island",
+          quantity: 3
+        },
+        {
+          name: "Jace",
+          quantity: 3
+        }
+      ])
+    }
+    it "adds to versions on update" do
+      decklist.update_attributes(name: "My Uber awesome deck!")
+      decklist.save
+      expect(decklist.versions).to_not be_empty
+    end
+
+    it "adds to versions on delete" do
+      decklist.destroy
+      decklist.save
+      expect(decklist.versions).to_not be_empty
+    end
+    it "adds to versions on create" do
+      Decklist.create(name: "another decklist", description: "rawr. im smart")
+      decklist.save
+      expect(decklist.versions).to_not be_empty
+    end
+    it "tracks changes to cards" do
+      card = decklist.cards.create(name: "Jace, Vryn's Prodigy", quantity: 4)
+      decklist.cards.find_by(name: "Jace, Vryn's Prodigy").update_attributes(name: "Brainstorm")
+      puts decklist.cards.last.versions.inspect
+      puts decklist.cards.inspect
+      decklist.save
+      expect(card.versions.inspect).to include "Jace, Vryn's Prodigy"
+    end
+  end
 end

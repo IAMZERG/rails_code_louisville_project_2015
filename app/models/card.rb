@@ -3,6 +3,7 @@ class Card < ActiveRecord::Base
   has_many :decklist_cards
   accepts_nested_attributes_for :decklist_cards, reject_if: :all_blank, allow_destroy: true
 
+  has_paper_trail
 
   validates :quantity, numericality: { only_integer: true }
 
