@@ -8,5 +8,15 @@
 <% @decklist.cards.each do |card| %>
   <div class="card-show"><%= card.quantity %> <%= card.name %></div>
 <% end %>
+
+<!--
+<% @decklist.cards.each do |card| %>
+  <% card.versions.each do |version| %>
+    <div><%= version.inspect %></div>
+  <% end %>
+<% end %>
+<%= @decklist.changes.inspect %>
+-->
+
 <hr>
 <%= button_to 'Edit', edit_decklist_path(@decklist), :method => "get", :class => "btn btn-success" %>

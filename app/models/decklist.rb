@@ -22,6 +22,20 @@ class Decklist < ActiveRecord::Base
     @total = nil
   end
 
+  def changes
+    versions = []
+    self.cards.each do |card|
+      card.versions.each do |version|
+        versions.append(version)
+      end
+    end
+    versions =versions.group_by { |version| version.transaction_id }
+    return versions
+  end
+
+
+
+
   private
   def card_names_are_unique_for_decklist
     self.cards.each do |card|
