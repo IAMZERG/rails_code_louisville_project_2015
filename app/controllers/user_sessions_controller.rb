@@ -13,4 +13,10 @@ class UserSessionsController < ApplicationController
       render action: 'new'
     end
   end
+  def destroy
+    session[:user_id] = nil
+    reset_session
+    redirect_to root_path, notice: "You have been logged out."
+  end
+
 end

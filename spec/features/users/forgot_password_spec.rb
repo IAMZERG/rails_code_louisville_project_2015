@@ -4,7 +4,7 @@ describe "Forgotten Passwords" do
   let!(:user) {create(:user) }
 
   it"sends a user an email" do
-    visit new_user_session_path
+    visit new_user_sessions_path
     click_link "Forgot Password"
     fill_in "Email", with: user.email
     expect {
@@ -13,7 +13,7 @@ describe "Forgotten Passwords" do
   end
 
   it "resets a password when following the email link" do
-    visit new_user_session_path
+    visit new_user_sessions_path
     click_link "Forgot Password"
     fill_in "Email", with: user.email
     click_button "Reset Password"
@@ -26,6 +26,15 @@ describe "Forgotten Passwords" do
     click_button "Change Password"
     expect(page).to have_content("Password reset was successful.")
     expect(page.current_path).to eq(decklists_path)
+
+    click_link "Log Out"
+    click_link "Log In"
+    fill_in "Email", with: user.email
+    fill_in "Password", with: "oogabooga"
+    click_button "Log In"
+
+    expect(page.current_path).to eq(decklists_path)
+
   end
 end
 

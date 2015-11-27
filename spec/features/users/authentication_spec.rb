@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Logging in" do
   it "displays the email address in the event of a failed login" do
-    visit new_user_session_path
+    visit new_user_sessions_path
     fill_in "Email Address", with: "jason@teamtreehouse.com"
     fill_in "Password", with: "incorrect"
     click_button "Log In"
@@ -13,7 +13,7 @@ describe "Logging in" do
   it "logs the user in and goes to the decklists" do
     User.create(first_name: "Wes", last_name: "Mess", email: "wesmess@hotmess.com",
                 password: "password", password_confirmation: "password")
-    visit new_user_session_path
+    visit new_user_sessions_path
     fill_in "Email Address", with: "wesmess@hotmess.com"
     fill_in "Password", with: "password"
     click_button "Log In"
