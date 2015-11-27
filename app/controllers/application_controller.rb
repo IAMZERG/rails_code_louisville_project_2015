@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     if current_user
       true
     else
-      redirect_to new_user_session_path, notice: "You must be logged in to access that page."
+      redirect_to new_user_sessions_path, notice: "You must be logged in to access that page."
     end
   end
 

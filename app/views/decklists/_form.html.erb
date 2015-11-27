@@ -10,31 +10,32 @@
       </ul>
     </div>
   <% end %>
-
   <div class="decklist_fields">
     <div class="field">
       <%= f.label :name, "Decklist Name" %><br>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, class: "form-control" %>
     </div>
     <div class="field">
       <%= f.label :description %><br>
-      <%= f.text_area :description %>
+      <%= f.text_area :description, class: "form-control" %>
     </div>
   </div>
   <%= f.fields_for :cards do |cards_form| %>
-    <div class="field">
-      <%= cards_form.label :quantity %>
-      <%= cards_form.text_field :quantity %>
-    </div>
-    <div class="field">
-      <%= cards_form.label :name %>
-      <%= cards_form.text_field :name %>
+    <div class="card row">
+      <div class="field col-xs-2">
+        <%= cards_form.text_field :quantity, placeholder: "qty", class: "form-control" %>
+      </div>
+      <div class="field col-xs-10">
+        <%= cards_form.text_field :name, placeholder: "card name", class: "form-control" %>
+      </div>
     </div>
   <% end %>
+  <div class="btn btn-success add-card">+ Card</div>
 
 
 
+  <hr>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit nil, id: "submit", class: "btn btn-default" %>
   </div>
 <% end %>

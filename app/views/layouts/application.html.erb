@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Gotdecks</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Gotdecks</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body class="<%= controller_name %> <%= action_name %>">
 
-  <div class="nav">
-    <h1><%= link_to "Gotdecks", root_path  %></h1>
-    <ul>
-      <li><%= link_to "Decklists", decklists_path %></li>
-      <li><%= link_to "Sign Up", new_user_path %></li>
-      <li><%= link_to "Sign In", new_user_session_path %></li>
-    </ul>
+    <div class="bottom-border-fixed">
+      <div class="navbar">
+        <h1><%= link_to "Gotdecks", root_path, class: "nav nav-header"  %></h1>
+        <ul class="nav-links pull-right">
+          <li><%= link_to "Decklists", decklists_path %></li>
+          <li><%= link_to "Sign Up", new_user_path %></li>
+          <li><%= link_to "Log In", new_user_sessions_path %></li>
+          <li><%= link_to "Log Out", logout_path, method: :delete %></li>
+        </ul>
 
-    <% flash.each do |type, message| %>
-      <div class="alert flash <%= type %>">
-        <%= message %>
+        <% flash.each do |type, message| %>
+          <div class="alert flash <%= type %>">
+            <%= message %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+    <div class="container app-partial-container">
+      <%= yield %>
+    </div>
 
-<%= yield %>
-
-</body>
+  </body>
 </html>

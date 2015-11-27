@@ -14,3 +14,14 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require bootstrap.min.js
+
+  $(document).on('ready page:load', function(event) {
+    $(".card").hide();
+    $(".decklists.edit .card").show();
+    $(".decklists.edit .add-card").hide();
+    $(".add-card").click(function(action) {
+      action.preventDefault();
+      $(".card:hidden").first().show();
+    });
+  });
