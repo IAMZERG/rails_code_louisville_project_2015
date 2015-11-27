@@ -1,19 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @decklist.name %>
-</p>
+<h1><%= @decklist.name %></h1>
 
-<p>
-  <strong>Description:</strong>
-  <%= @decklist.description %>
-</p>
+<h3><%= @decklist.description %></h3>
 
 
 <% @decklist.cards.each do |card| %>
-  <div class="card"><%= card.quantity %> <%= card.name %></div>
+  <div class="card-show"><%= card.quantity %> <%= card.name %></div>
 <% end %>
-
-<%= link_to 'Edit', edit_decklist_path(@decklist) %> |
-<%= link_to 'Back', decklists_path %>
+<hr>
+<%= button_to 'Edit', edit_decklist_path(@decklist), :method => "get", :class => "btn btn-success" %>

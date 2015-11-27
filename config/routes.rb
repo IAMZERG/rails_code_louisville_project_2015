@@ -5,7 +5,7 @@ Gotdecks::Application.routes.draw do
   delete "/logout" => "user_sessions#destroy", as: :logout
 
   resources :decklists do
-    resources :cards, only: [:new, :create, :edit, :update, :destroy]
+    resources :cards, only: [:new, :create, :edit, :update]
   end
 
   resources :password_resets, only: [:new, :create, :edit, :update]
