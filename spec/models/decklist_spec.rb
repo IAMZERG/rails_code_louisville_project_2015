@@ -130,18 +130,21 @@ describe Decklist do
     it "#tracking changes to cards" do
       card = decklist.cards.create(name: "Jace, Vryn's Prodigy", quantity: 4)
       decklist.cards.find_by(name: "Jace, Vryn's Prodigy").update_attributes(name: "Brainstorm")
-      puts decklist.cards.last.versions.inspect
-      puts decklist.cards.inspect
       decklist.save
       expect(card.versions.inspect).to include "Jace, Vryn's Prodigy"
     end
     it "#tracking metadata" do
       card = decklist.cards.create(name: "Jace, Vryn's Prodigy", quantity: 4)
-      decklist.cards.find_by(name: "Jace, Vryn's Prodigy").update_attributes(name: "Brainstorm", quantity: 2)
-      puts decklist.cards.last.versions.inspect
-      puts decklist.versions.last.cards_total
-      decklist.save
+      card.update_attributes(name: "Brainstorm", quantity: 2)
+      card.save
       expect(card.versions.inspect).to include "Jace, Vryn's Prodigy"
+      card.update_attributes(name: "Jace, the Mind Sculptor", quantity: 3)
+      card.save
+      puts card.versions.inspect
+      expect(card.versions.first.prev_name).to eq("Jace, Vryn's Prodigy")
+      expect(card.versions.first.prev_qty).to eq(4)
+      expect(card.versions.last.prev_name).to eq("Brainstorm")
+      expect(card.versions.last.prev_qty).to eq(2)
     end
 
   end
