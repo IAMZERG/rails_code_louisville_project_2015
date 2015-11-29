@@ -29,12 +29,9 @@ class Decklist < ActiveRecord::Base
         versions.append(version)
       end
     end
-    versions =versions.group_by { |version| version.transaction_id }
+    versions = versions.group_by { |version| version.transaction_id }
     return versions
   end
-
-
-
 
   private
   def card_names_are_unique_for_decklist

@@ -4,19 +4,15 @@
 
 <h3><%= @decklist.description %></h3>
 
-
-<% @decklist.cards.each do |card| %>
-  <div class="card-show"><%= card.quantity %> <%= card.name %></div>
-<% end %>
-
-<!--
-<% @decklist.cards.each do |card| %>
-  <% card.versions.each do |version| %>
-    <div><%= version.inspect %></div>
+<% @decklist.changes.each do |c| %>
+  <h3>Version Number <%= c[0] %></h3>
+  <% c[1].each do |v| %>
+    <p><%= v.curr_name %></p>
+    <%= v.changeset %>
+    <p><%= Card.find(v.item_id).quantity %> <%= Card.find(v.item_id).name %></p>
   <% end %>
 <% end %>
-<%= @decklist.changes.inspect %>
--->
+
 
 <hr>
 <%= button_to 'Edit', edit_decklist_path(@decklist), :method => "get", :class => "btn btn-success" %>
