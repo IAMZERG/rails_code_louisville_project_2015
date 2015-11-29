@@ -7,7 +7,7 @@
 <% @decklist.changes.each do |c| %>
   <h3>Version Number <%= c[0] %></h3>
   <% c[1].each do |v| %>
-    <p><%= v.curr_name %></p>
+    <p><%= v.curr_qty %> <%= v.curr_name %></p>
     <%= v.changeset %>
     <p><%= Card.find(v.item_id).quantity %> <%= Card.find(v.item_id).name %></p>
   <% end %>
