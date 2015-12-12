@@ -11,7 +11,7 @@
 <% @decklist.changes.each do |c| %>
   <h3>Version Number <%= c[1].last.created_at %></h3>
   <% c[1].each do |v| %>
-    <p><%= v.inspect %></p>
+    <p><%= v.changeset %></p>
     <% if v.event == "create" %>
       <p>+<%= v.prev_qty %> <%= v.prev_name %></p>
     <% end %>
@@ -20,8 +20,8 @@
     <% end %>
     <% if v.event == "update" %>
       <% if (not v.changeset[:name]) &&  (v.changeset[:quantity]) %>
-        <%= v.changeset[:quantity][1]-v.changeset[:quantity][0] %>
-         <%= v[:prev_name] %>
+        <p><%= v.changeset[:quantity][1]-v.changeset[:quantity][0] %>
+        <%= v[:prev_name] %></p>
        <% end %>
        <% if (not v.changeset[:quantity]) &&  (v.changeset[:name]) %>
          <p>+<%= v.prev_qty %> <%= v.changeset[:name].at(1) %>

@@ -21,6 +21,9 @@ class DecklistsController < ApplicationController
 
   # GET /decklists/1/edit
   def edit
+    @decklist = Decklist.find(params[:id])
+    len = @decklist.cards.length
+    (100-len).times { @decklist.cards.build }
   end
 
   # POST /decklists

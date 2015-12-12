@@ -17,11 +17,14 @@
 //= require bootstrap.min.js
 
   $(document).on('ready page:load', function(event) {
-    $(".card").hide();
-    $(".decklists.edit .card").show();
-    $(".decklists.edit .add-card").hide();
+    $("[id^='decklist_cards_attributes']").toggleClass('hidden');
+    $("[id^='decklist_cards_attributes'][value]").toggleClass('hidden');
     $(".add-card").click(function(action) {
       action.preventDefault();
-      $(".card:hidden").first().show();
+
+      console.log($(".hidden"));
+      $(".hidden").first().toggleClass('hidden');
+      $(".hidden").first().toggleClass('hidden');
+
     });
   });

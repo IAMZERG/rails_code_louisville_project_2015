@@ -16,6 +16,8 @@ describe "Editing decklists" do
 
     fill_in "Decklist Name", with: options[:name]
     fill_in "Description", with: options[:description]
+    fill_in "decklist[cards_attributes][4][quantity]", with: 60
+    fill_in "decklist[cards_attributes][4][name]", with: "This is a card's name"
     click_button "Update Decklist"
   end
 
@@ -57,4 +59,10 @@ describe "Editing decklists" do
     update_decklist decklist: decklist, description: "hi"
     expect(page).to have_content("error")
   end
+
+  it "displays cards in the deck" do
+    update_decklist decklist: decklist
+    expect(page).to have_content("This is a card's name")
+  end
+
 end
