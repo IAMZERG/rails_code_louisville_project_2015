@@ -12,6 +12,10 @@
   <% end %>
   <div class="decklist_fields">
     <div class="field">
+      <%= f.label :public, "Public Decklist?" %>
+      <%= f.check_box :public %>
+    </div>
+    <div class="field">
       <%= f.label :name, "Decklist Name" %><br>
       <%= f.text_field :name, class: "form-control" %>
     </div>

@@ -60,4 +60,9 @@ describe "Creating decklists" do
     expect(page).to_not have_content("Grocery list")
   end
 
+  it "defaults to private" do
+    create_decklist
+    expect(Decklist.last.public).to eq(false)
+  end
+
 end
