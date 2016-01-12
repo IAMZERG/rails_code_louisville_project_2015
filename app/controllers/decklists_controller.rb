@@ -2,6 +2,8 @@ class DecklistsController < ApplicationController
   before_action :require_user
   before_action :set_decklist, only: [:show, :edit, :update, :destroy]
 
+  after_action :default_public_to_false, only: [:create]
+
   # GET /decklists
   # GET /decklists.json
   def index
@@ -75,6 +77,14 @@ class DecklistsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_decklist
       @decklist = Decklist.find(params[:id])
+    end
+
+    # Use callback to default public to false
+
+    def default_public_to_false
+      if @decklist.public == null
+        @decklist.public = false
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

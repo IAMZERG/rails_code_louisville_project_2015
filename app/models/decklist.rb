@@ -30,6 +30,12 @@ class Decklist < ActiveRecord::Base
       end
     end
     versions = versions.group_by { |version| version.transaction_id }
+    versions.each do |v|
+      if version.event == "update"
+        if (not v.changeset[:name] && v.changeset[:quantity])
+        end
+      end
+    end
     return versions
   end
 

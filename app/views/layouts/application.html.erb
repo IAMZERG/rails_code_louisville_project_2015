@@ -9,26 +9,28 @@
   <body class="<%= controller_name %> <%= action_name %>">
 
     <div class="bottom-border-fixed">
-      <div class="navbar">
-        <h1><%= link_to "Gotdecks", root_path, class: "nav nav-header"  %></h1>
-        <ul class="nav-links pull-right">
-          <li><%= link_to "Decklists", decklists_path %></li>
-          <% if !@current_user %>
-            <li><%= link_to "Sign Up", new_user_path %></li>
-            <li><%= link_to "Log In", new_user_sessions_path %></li>
-          <% end %>
-          <% if @current_user %>
-            <li><%= link_to "Log Out", logout_path, method: :delete %></li>
-          <% end %>
-        </ul>
-
-        <% flash.each do |type, message| %>
-          <div class="alert flash <%= type %>">
-            <%= message %>
+      <div class="navbar navbar-default">
+        <div class="container-fluid">
+            <h1><%= link_to "GotDecks", root_path, class: "navbar-brand"  %></h1>
+            <ul class="nav navbar-nav navbar-right">
+              <% if !@current_user %>
+                <li><%= link_to "Public Decklists", decklists_path %></li>
+                <li><%= link_to "Sign Up", new_user_path %></li>
+                <li><%= link_to "Log In", new_user_sessions_path %></li>
+              <% end %>
+              <% if @current_user %>
+                <li><%= link_to "Decklists", decklists_path %></li>
+                <li><%= link_to "Log Out", logout_path, method: :delete %></li>
+              <% end %>
+            </ul>
           </div>
-        <% end %>
       </div>
     </div>
+    <% flash.each do |type, message| %>
+      <div class="alert flash <%= type %>">
+        <%= message %>
+      </div>
+    <% end %>
     <div class="container app-partial-container">
       <%= yield %>
     </div>
