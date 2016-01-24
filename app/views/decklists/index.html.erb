@@ -2,18 +2,43 @@
   <div class="row">
     <h1>Listing decklists</h1>
   </div>
+  <hr>
+  <div class="row">
+    <h2>Your decklists</h2>
+    <% if @current_user %>
+      <% @my_decklists.each do |decklist| %>
+        <div class="row" id=<%="decklist_#{decklist.id}"%>>
+          <div class="col-md-3"><h3><%= decklist.name %></h3></div>
+          <div class="col-md-5"><h5><%= decklist.description %></h5></div>
 
-  <% @decklists.each do |decklist| %>
-    <div class="row" id=<%="decklist_#{decklist.id}"%>>
-      <div class="col-md-3"><h2><%= decklist.name %></h2></div>
-      <div class="col-md-5"><h3><%= decklist.description %></h3></div>
-
-      <div class="col-md-1"><%= link_to 'Show', decklist %></div>
-        <div class="col-md-1"><%= link_to 'Edit', edit_decklist_path(decklist) %></div>
-        <div class="col-md-1"><%= link_to 'Destroy', decklist, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+          <div class="col-md-1"><%= link_to 'Show', decklist %></div>
+          <div class="col-md-1"><%= link_to 'Edit', edit_decklist_path(decklist) %></div>
+          <div class="col-md-1"><%= link_to 'Destroy', decklist, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+        </div>
+        <hr>
+      <% end %>
+    <% else %>
+      <div class="row">
+        <div class="col-md-12">Log in to view your decklists</div>
       </div>
     <% end %>
+  </div>
+  <div class="row">
+    <h2>Public decklists</h2>
+      <% @public_decklists.each do |decklist| %>
+        <div class="row" id=<%="decklist_#{decklist.id}"%>>
+          <div class="col-md-3"><h3><%= decklist.name %></h3></div>
+          <div class="col-md-5"><h5><%= decklist.description %></h5></div>
 
-<br>
+          <div class="col-md-1"><%= link_to 'Show', decklist %></div>
+          <div class="col-md-1"><%= link_to 'Edit', edit_decklist_path(decklist) %></div>
+          <div class="col-md-1"><%= link_to 'Destroy', decklist, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+        </div>
+        <hr>
+      <% end %>
+  </div>
+  <hr>
 
-<%= link_to 'New Decklist', new_decklist_path, :class => "btn btn-default", :method => "get" %>
+  <br>
+
+  <%= link_to 'New Decklist', new_decklist_path, :class => "btn btn-default", :method => "get" %>

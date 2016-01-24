@@ -1,13 +1,15 @@
 class DecklistsController < ApplicationController
-  before_action :require_user
   before_action :set_decklist, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, only: [:create, :edit, :destroy, :new]
 
-  after_action :default_public_to_false, only: [:create]
 
   # GET /decklists
   # GET /decklists.json
   def index
-    @decklists = Decklist.all
+    @public_decklists = Decklist.where(public:true)
+    if @current_user
+      @my_decklists = Decklist.where(user_id: @current_user.id)
+    end
   end
 
   # GET /decklists/1
@@ -80,13 +82,6 @@ class DecklistsController < ApplicationController
     end
 
     # Use callback to default public to false
-
-    def default_public_to_false
-      if @decklist.public == null
-        @decklist.public = false
-      end
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def decklist_params
       params.require(:decklist).permit(:name, :description, cards_attributes: [:id, :name, :quantity])

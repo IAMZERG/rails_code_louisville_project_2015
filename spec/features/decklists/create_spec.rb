@@ -62,7 +62,10 @@ describe "Creating decklists" do
 
   it "defaults to private" do
     create_decklist
-    expect(Decklist.last.public).to eq(false)
+    expect(Decklist.count).to eq(1)
+    expect(Decklist.last.description).to eq("This is my decklist.")
+
+    expect(Decklist.last.public).to eq(nil)
   end
 
 end

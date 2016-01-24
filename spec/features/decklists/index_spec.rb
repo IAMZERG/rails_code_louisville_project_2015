@@ -10,6 +10,7 @@ describe "Listing decklists" do
   def create_decklist(options={})
     options[:name] ||= "My decklist"
     options[:description] ||= "This is my decklist."
+    options[:public] ||= false
 
     visit "/decklists"
     expect(page).to have_content("Listing decklists")
@@ -31,11 +32,12 @@ describe "Listing decklists" do
   end
   it "requires login to show private decklists" do
     visit "/decklists"
-    expect(page).to have_content("Log in to see your decklists.")
+    expect(page).to have_content("Log in to view your decklists")
   end
 
   it "shows public decklists when not logged in" do
-    Decklist.new(name: "cool_deck", description: "Rawr.  I'm the best.", public: true)
+    create_user_and_log_in
+    create_decklist({public: true, description: "Rawr.  I'm the best.", name: "cool_deck"})
     visit "/decklists"
     expect(page).to have_content("Rawr.  I'm the best.")
   end

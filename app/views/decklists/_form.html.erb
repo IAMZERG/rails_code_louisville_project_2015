@@ -12,6 +12,7 @@
   <% end %>
   <div class="decklist_fields">
     <div class="field">
+      <% @decklist.public = false %>
       <%= f.label :public, "Public Decklist?" %>
       <%= f.check_box :public %>
     </div>
