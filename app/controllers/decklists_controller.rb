@@ -84,6 +84,6 @@ class DecklistsController < ApplicationController
     # Use callback to default public to false
     # Never trust parameters from the scary internet, only allow the white list through.
     def decklist_params
-      params.require(:decklist).permit(:name, :description, cards_attributes: [:id, :name, :quantity])
+      params.require(:decklist).permit(:name, :description, :public, cards_attributes: [:id, :name, :quantity])
     end
 end

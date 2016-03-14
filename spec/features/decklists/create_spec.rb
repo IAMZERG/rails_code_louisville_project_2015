@@ -65,7 +65,7 @@ describe "Creating decklists" do
     expect(Decklist.count).to eq(1)
     expect(Decklist.last.description).to eq("This is my decklist.")
 
-    expect(Decklist.last.public).to eq(nil)
+    expect(Decklist.last.public).to eq(false)
   end
 
 end

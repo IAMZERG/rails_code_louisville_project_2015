@@ -8,6 +8,7 @@
   <div><%= card.quantity %> <%= card.name %></div>
 <% end %>
 <div>Total: <strong><%= @decklist.total %></strong></div>
+<button class="btn btn-primary">Copy Deck</button>
 <% @decklist.changes.each do |c| %>
   <h3>Version From: <%= c[1].last.created_at %></h3>
   <% c[1].each do |v| %>
