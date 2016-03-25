@@ -2,9 +2,8 @@ require 'spec_helper'
 
 
 # to-do list:
-# Get all the tests passing regarding the public attribute on decklists
 # # modify the decklists view so that it accomodates the new attribute
-# #add section to decklists view so that it shows 'Log in to see your decklists.'
+# it should not show "Edit" or "Delete" as options when not logged in.
 
 describe "Listing decklists" do
   def create_decklist(options={})
@@ -21,7 +20,7 @@ describe "Listing decklists" do
     click_button "Create Decklist"
   end
   def create_user_and_log_in
-    User.create(first_name: "Wes", last_name: "Mess", email: "wesmess@hotmess.com",
+    user = User.create(first_name: "Wes", last_name: "Mess", email: "wesmess@hotmess.com",
                 password: "password", password_confirmation: "password")
     visit new_user_sessions_path
     fill_in "Email Address", with: "wesmess@hotmess.com"
@@ -29,6 +28,7 @@ describe "Listing decklists" do
     click_button "Log In"
     expect(page).to have_content("Decklists")
     expect(page).to have_content("Thanks for logging in!")
+    return user
   end
   it "requires login to show private decklists" do
     visit "/decklists"
@@ -42,6 +42,22 @@ describe "Listing decklists" do
     expect(page).to have_content("Rawr.  I'm the best.")
   end
 
+  it "does not show edit or delete options when not logged in" do
+    user = create_user_and_log_in
+    decklist = create_decklist
+    click_link("Log Out")
+    visit "/decklists"
+    expect(page).to_not have_content("Edit")
+    expect(page).to_not have_content("Delete")
+  end
+
+  it "shows edit and delete options when logged in" do
+    create_user_and_log_in
+    create_decklist
+    visit "/decklists"
+    expect(page).to have_content("Edit")
+    expect(page).to have_content("Destroy")
+  end
 
   it "shows a user's decklists when logged in" do
     create_user_and_log_in

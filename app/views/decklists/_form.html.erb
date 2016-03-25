@@ -12,7 +12,6 @@
   <% end %>
   <div class="decklist_fields">
     <div class="field">
-      <% @decklist.public = false %>
       <%= f.label :public, "Public Decklist?" %>
       <%= f.select(:public, [["Private", false], ["Public", true]]) %>
     </div>

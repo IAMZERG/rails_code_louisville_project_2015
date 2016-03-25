@@ -13,18 +13,26 @@
   <h3>Version From: <%= c[1].last.created_at %></h3>
   <% c[1].each do |v| %>
     <!--<p><%= v.changeset %></p> -->
+
+
     <% if v.event == "create" %>
       <p>+<%= v.prev_qty %> <%= v.prev_name %></p>
     <% end %>
     <% if v.event == "destroy" %>
       <p class="red-text">-<%= v.prev_qty %> <%= v.prev_name %></p>
+
+      <% old_decklist = v.reify(:has_many => true)%>
+      <%= old_decklist.cards %>
     <% end %>
     <% if v.event == "update" %>
+
+      <% old_decklist = v.reify(:has_many => true)%>
+      <%= old_decklist.cards %>
       <% if (not v.changeset[:name]) &&  (v.changeset[:quantity]) %>
         <p><%= v.changeset[:quantity][1]-v.changeset[:quantity][0] %>
         <%= v[:prev_name] %></p>
-       <% end %>
-       <% if (not v.changeset[:quantity]) &&  (v.changeset[:name]) %>
+    <% end %>
+    <% if (not v.changeset[:quantity]) &&  (v.changeset[:name]) %>
          <p class="green-text">+<%= v.prev_qty %> <%= v.changeset[:name].at(1) %>
          <p class="red-text">-<%= v.prev_qty %> <%= v.changeset[:name].at(0) %>
        <% end %>
