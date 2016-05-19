@@ -5,38 +5,60 @@
   <hr>
   <div class="row">
     <h2>Your decklists</h2>
-    <% if @current_user %>
-      <% @my_decklists.each do |decklist| %>
-        <div class="row" id=<%="decklist_#{decklist.id}"%>>
-          <div class="col-md-3"><h3><%= decklist.name %></h3></div>
-          <div class="col-md-5"><h5><%= decklist.description %></h5></div>
+    <table class="table table-hover">
+      <% if @current_user %>
+        <thead>
+          <th>Name</th>
+          <th>Description</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <% @my_decklists.each do |decklist| %>
+            <tr id=<%="decklist_#{decklist.id}"%>>
+              <td><%= decklist.name %></td>
+              <td><%= decklist.description %></td>
 
-          <div class="col-md-1"><%= link_to 'Show', decklist %></div>
-          <div class="col-md-1"><%= link_to 'Edit', edit_decklist_path(decklist) %></div>
-          <div class="col-md-1"><%= link_to 'Destroy', decklist, method: :delete, data: { confirm: 'Are you sure?' } %></div>
-        </div>
+              <td><%= link_to 'Show', decklist %></td>
+              <td><%= link_to 'Edit', edit_decklist_path(decklist) %></td>
+              <td><%= link_to 'Destroy', decklist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          </tbody>
+        </table>
         <hr>
-      <% end %>
-    <% else %>
-      <div class="row">
-        <div class="col-md-12">Log in to view your decklists</div>
-      </div>
-    <% end %>
-  </div>
-  <div class="row">
-    <h2>Public decklists</h2>
-      <% @public_decklists.each do |decklist| %>
-        <div class="row" id=<%="decklist_#{decklist.id}"%>>
-          <div class="col-md-3"><h3><%= decklist.name %></h3></div>
-          <div class="col-md-5"><h5><%= decklist.description %></h5></div>
-
-          <div class="col-md-1"><%= link_to 'Show', decklist %></div>
+      <% else %>
+        <div class="row">
+          <div class="col-md-12">Log in to view your decklists</div>
         </div>
-        <hr>
       <% end %>
-  </div>
-  <hr>
+    </div>
+    <div class="row">
+      <h2>Public decklists</h2>
+      <table class="table table-hover">
+        <thead>
+          <th>Name</th>
+          <th>Description</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <% @public_decklists.each do |decklist| %>
+            <tr id=<%="decklist_#{decklist.id}"%>>
+              <td><%= decklist.name %></td>
+              <td><%= decklist.description %></td>
+              <td><%= link_to 'Show', decklist %></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            <% end %>
+          </tr>
+      </tbody>
+      </table>
+    </div>
+    <hr>
 
-  <br>
+    <br>
 
-  <%= link_to 'New Decklist', new_decklist_path, :class => "btn btn-default", :method => "get" %>
+    <%= link_to 'New Decklist', new_decklist_path, :class => "btn btn-default", :method => "get" %>
