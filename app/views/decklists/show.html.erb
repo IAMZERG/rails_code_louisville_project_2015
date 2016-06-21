@@ -16,8 +16,10 @@
 <h3>Changes by Card</h3>
 </div>
 <hr>
+
 <% @decklist.cards.each do |card| %>
   <h4><%= card.name %>  Added: <%= card.created_at %></h4>
+
   <% card.versions.each do |v| %>
     <% if v.event == "create" %>
       <p>+<%= v.prev_qty %> <%= v.prev_name %></p>
@@ -27,7 +29,10 @@
     <% end %>
     <% if v.event == "update" %>
       <% if (not v.changeset[:name]) &&  (v.changeset[:quantity]) %>
-        <p><%= v.changeset[:quantity][1]-v.changeset[:quantity][0] %> <%= v[:prev_name] %></p>
+        <% if v.changeset[:quantity][1]-v.changeset[:quantity][0] < 0 %>
+          <% cardColor = 'class=red-text'%>
+        <% end %>
+        <p <%= cardColor %>><%= v.changeset[:quantity][1]-v.changeset[:quantity][0] %> <%= v[:prev_name] %></p>
       <% end %>
     <% end %>
     <% if (not v.changeset[:quantity]) &&  (v.changeset[:name]) %>
