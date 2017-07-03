@@ -4,8 +4,8 @@ $(".cardsearch").keyup(function (event) {
   event.preventDefault();
   $(".showing").hide();
   console.log("button pressed!");
-  let theValue = $(this).val();
-  let keyupContext = this;
+  var theValue = $(this).val();
+  var keyupContext = this;
   $.ajax({
     url: "https://api.magicthegathering.io/v1/cards?",
     dataType: 'json',
@@ -19,11 +19,11 @@ $(".cardsearch").keyup(function (event) {
     data.query.search.forEach(function(item) {
       console.log(item);
       container.appendTo(keyupContext);
-      let container = $("#results");
-      let result = $("<li class='result'><a></a></li>").appendTo(container);
+      var container = $("#results");
+      var result = $("<li class='result'><a></a></li>").appendTo(container);
       console.log(result);
       $("a:empty").append(item.title)
-      //.attr("href", "http://http://gatherer.wizards.com/Pages/Search/Default.aspx?name=+["+theValue+"]")
+      .attr("href", "http://http://gatherer.wizards.com/Pages/Search/Default.aspx?name=+["+theValue+"]")
       .attr("target", "_blank");
       result.append(item.snippet + "...");
 
