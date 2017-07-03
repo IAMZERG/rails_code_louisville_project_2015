@@ -23,7 +23,7 @@ $(".cardsearch").keyup(function (event) {
       let result = $("<li class='result'><a></a></li>").appendTo(container);
       console.log(result);
       $("a:empty").append(item.title)
-      .attr("href", "http://http://gatherer.wizards.com/Pages/Search/Default.aspx?name=+["+inputValue+"]")
+      //.attr("href", "http://http://gatherer.wizards.com/Pages/Search/Default.aspx?name=+["+inputValue+"]")
       .attr("target", "_blank");
       result.append(item.snippet + "...");
 
