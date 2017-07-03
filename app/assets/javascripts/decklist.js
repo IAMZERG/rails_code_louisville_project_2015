@@ -8,7 +8,7 @@ $(".cardsearch").keyup(function (event) {
   let keyupContext = this;
   $.ajax({
     url: "https://api.magicthegathering.io/v1/cards?",
-    dataType: 'jsonp',
+    dataType: 'json',
     type: "GET",
     data: {
       name: inputValue
