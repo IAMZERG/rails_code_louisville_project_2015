@@ -38,3 +38,5 @@ $(".cardsearch").keyup(function (event) {
     //
     //
     //
+  });
+});
